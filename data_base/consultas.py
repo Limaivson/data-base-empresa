@@ -159,10 +159,10 @@ class Consultas:
             return False
 
     @staticmethod
-    def inserir_pagamento(valor, tipo_pagamento, data):
+    def inserir_pagamento(id_cliente, id_funcionario, valor, tipo_pagamento, data):
         try:
-            con.cursor.execute(f"INSERT INTO Pagamento (valor, tipo_pagamento, data) VALUES ({valor}, "
-                               f"'{tipo_pagamento}', '{data}')")
+            con.cursor.execute(f"INSERT INTO Pagamento (cliente_id, funcionario_id, valor, tipo_pagamento, data) "
+                               f"VALUES ({id_cliente}, {id_funcionario}, {valor}, '{tipo_pagamento}', '{data}')")
             con.conexao.commit()
             return True
         except Exception as e:
@@ -180,10 +180,11 @@ class Consultas:
             return False
 
     @staticmethod
-    def atualizar_pagamento(id_pagamento, valor, tipo_pagamento, data):
+    def atualizar_pagamento(id_pagamento, id_cliente, id_funcionario, tipo_pagamento, valor, data):
         try:
-            con.cursor.execute(f"UPDATE Pagamento SET valor = {valor}, tipo_pagamento = '{tipo_pagamento}', data = "
-                               f"'{data}' WHERE id = {id_pagamento}")
+            con.cursor.execute(f"UPDATE Pagamento SET cliente_id = {id_cliente}, funcionario_id = {id_funcionario},"
+                               f" valor = {valor}, tipo_pagamento = '{tipo_pagamento}', data = '{data}' "
+                               f"WHERE id = {id_pagamento}")
             con.conexao.commit()
             return True
         except Exception as e:
