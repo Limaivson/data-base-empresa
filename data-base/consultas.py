@@ -86,7 +86,8 @@ class Consultas:
     @staticmethod
     def inserir_cliente(nome, telefone, endereco):
         try:
-            con.cursor.execute(f"INSERT INTO Cliente (nome, telefone, endereco) VALUES ('{nome}', '{telefone}', '{endereco}')")
+            con.cursor.execute(f"INSERT INTO Cliente (nome, telefone, endereco) VALUES ('{nome}', '{telefone}', "
+                               f"'{endereco}')")
             con.conexao.commit()
             return True
         except Exception as e:
@@ -106,7 +107,8 @@ class Consultas:
     @staticmethod
     def atualizar_cliente(id_cliente, nome, telefone, endereco):
         try:
-            con.cursor.execute(f"UPDATE Cliente SET nome = '{nome}', telefone = '{telefone}', endereco = '{endereco}' WHERE id = {id_cliente}")
+            con.cursor.execute(f"UPDATE Cliente SET nome = '{nome}', telefone = '{telefone}', endereco = '{endereco}' "
+                               f"WHERE id = {id_cliente}")
             con.conexao.commit()
             return True
         except Exception as e:
@@ -159,7 +161,8 @@ class Consultas:
     @staticmethod
     def inserir_pagamento(valor, tipo_pagamento, data):
         try:
-            con.cursor.execute(f"INSERT INTO Pagamento (valor, tipo_pagamento, data) VALUES ({valor}, '{tipo_pagamento}', '{data}')")
+            con.cursor.execute(f"INSERT INTO Pagamento (valor, tipo_pagamento, data) VALUES ({valor}, "
+                               f"'{tipo_pagamento}', '{data}')")
             con.conexao.commit()
             return True
         except Exception as e:
@@ -179,7 +182,8 @@ class Consultas:
     @staticmethod
     def atualizar_pagamento(id_pagamento, valor, tipo_pagamento, data):
         try:
-            con.cursor.execute(f"UPDATE Pagamento SET valor = {valor}, tipo_pagamento = '{tipo_pagamento}', data = '{data}' WHERE id = {id_pagamento}")
+            con.cursor.execute(f"UPDATE Pagamento SET valor = {valor}, tipo_pagamento = '{tipo_pagamento}', data = "
+                               f"'{data}' WHERE id = {id_pagamento}")
             con.conexao.commit()
             return True
         except Exception as e:
