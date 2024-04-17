@@ -148,7 +148,10 @@ class Consultas:
         try:
             con.cursor.execute("SELECT * FROM Pagamento")
             pag = con.cursor.fetchall()
-            return Pagamento(pag[0], pag[1], pag[2])
+            lista_pagamentos = []
+            for i in pag:
+                lista_pagamentos.append(Pagamento(i[0], i[1], i[2]))
+            return lista_pagamentos
         except Exception as e:
             print(f'Erro ao listar pagamentos: {e}')
             return False
@@ -192,4 +195,3 @@ class Consultas:
         except Exception as e:
             print(f'Erro ao buscar pagamento: {e}')
             return False
-    
