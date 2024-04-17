@@ -1,6 +1,7 @@
 from mysql_connection import Mysql_connection
 from Funcionario import Funcionario
 from Cliente import Cliente
+from Pagamento import Pagamento
 
 con = Mysql_connection()
 
@@ -141,3 +142,54 @@ class Consultas:
         except Exception as e:
             print(f'Erro ao buscar cliente: {e}')
             return False
+
+    @staticmethod
+    def listar_pagamentos():
+        try:
+            con.cursor.execute("SELECT * FROM Pagamento")
+            pag = con.cursor.fetchall()
+            return Pagamento(pag[0], pag[1], pag[2])
+        except Exception as e:
+            print(f'Erro ao listar pagamentos: {e}')
+            return False
+
+    @staticmethod
+    def inserir_pagamento(valor, tipo_pagamento, data):
+        try:
+            con.cursor.execute(f"INSERT INTO Pagamento (valor, tipo_pagamento, data) VALUES ({valor}, '{tipo_pagamento}', '{data}')")
+            con.conexao.commit()
+            return True
+        except Exception as e:
+            print(f'Erro ao inserir pagamento: {e}')
+            return False
+
+    @staticmethod
+    def deletar_pagamento(id_pagamento):
+        try:
+            con.cursor.execute(f"DELETE FROM Pagamento WHERE id = {id_pagamento}")
+            con.conexao.commit()
+            return True
+        except Exception as e:
+            print(f'Erro ao deletar pagamento: {e}')
+            return False
+
+    @staticmethod
+    def atualizar_pagamento(id_pagamento, valor, tipo_pagamento, data):
+        try:
+            con.cursor.execute(f"UPDATE Pagamento SET valor = {valor}, tipo_pagamento = '{tipo_pagamento}', data = '{data}' WHERE id = {id_pagamento}")
+            con.conexao.commit()
+            return True
+        except Exception as e:
+            print(f'Erro ao atualizar pagamento: {e}')
+            return False
+
+    @staticmethod
+    def buscar_pagamento(id_pagamento):
+        try:
+            con.cursor.execute(f"SELECT * FROM Pagamento WHERE id = {id_pagamento}")
+            pag = con.cursor.fetchone()
+            return Pagamento(pag[0], pag[1], pag[2])
+        except Exception as e:
+            print(f'Erro ao buscar pagamento: {e}')
+            return False
+    
